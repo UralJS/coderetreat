@@ -40,10 +40,10 @@ const spaghetti = {
     },
 
     prepareSession: function({ players, sessions }) {
-        this._sessions = sessions;
+        this._sessions = sessions || [];
 
         this._session = {
-            id: sessions.length,
+            id: this._sessions.length,
             pairs: []
         };
 
@@ -145,7 +145,7 @@ const spaghetti = {
         wrapper.classList.add("clearfix");
 
         const header = document.createElement("h1");
-        header.innerHTML = `Сессия №${this._session.id}`;
+        header.innerHTML = `Сессия №${this._session.id + 1}`;
         wrapper.appendChild(header);
 
         this._session.pairs.forEach(pair => {
@@ -184,6 +184,11 @@ const spaghetti = {
         return wrapper;
     },
 
+    showSuccessMessage: function() {
+        const button = this._container.querySelector(".js-save");
+        button.innerHTML = "Сессия сохранена";
+    },
+
     signIn: function() {
         firebase
             .auth()
@@ -198,7 +203,8 @@ const spaghetti = {
 
         this._ref
             .child("sessions")
-            .set(this._sessions);
+            .set(this._sessions)
+            .then(() => { this.showSuccessMessage() });
 
         this._ref
             .child("players")
