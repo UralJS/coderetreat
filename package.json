@@ -1,0 +1,18 @@
+{
+  "name": "coderetreat",
+  "version": "0.0.1",
+  "description": "UralJS Code Retreat",
+  "devDependencies": {
+    "connect": "3.6.2",
+    "serve-static": "1.12.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UralJS/coderetreat.git"
+  },
+  "author": "Kontur.Billing",
+  "license": "MIT"
+}
