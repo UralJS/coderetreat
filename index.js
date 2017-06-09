@@ -145,6 +145,7 @@ const spaghetti = {
         wrapper.classList.add("clearfix");
 
         const header = document.createElement("h1");
+        header.setAttribute("style", "padding-left: 12px; margin-bottom: 70px;");
         header.innerHTML = `Сессия №${this._session.id + 1}`;
         wrapper.appendChild(header);
 
@@ -158,16 +159,16 @@ const spaghetti = {
 
     renderTable: function({ tableNumber, pair } = {}) {
         const table = document.createElement("div");
-        table.classList.add("col-lg-4");
-        table.classList.add("col-md-4");
-        table.classList.add("col-sm-6");
-        table.classList.add("col-xs-12");
+        table.setAttribute("style", "width: 20%");
+        table.classList.add("col-lg-3");
+        table.classList.add("col-md-3");
 
         const members = pair.map(this.findPlayerById.bind(this)).map(({ firstName, lastName }) => `${firstName} ${lastName}`);
 
         table.innerHTML = `
-            <div>Стол №${tableNumber}:</div>
-            <div>${members.join(", ")}</div>
+            <div style="font-weight: bold">Стол №${tableNumber}:</div>
+            <div>${members[0]}</div>
+            <div style="margin-bottom: 20px;">${members[1] || ""}</div>
         `;
 
         return table;
@@ -175,7 +176,7 @@ const spaghetti = {
 
     renderSaveButton: function() {
         const wrapper = document.createElement("div");
-        wrapper.setAttribute("style", "margin-top: 20px");
+        wrapper.setAttribute("style", "margin-top: 70px");
         wrapper.innerHTML = `<button type="button" class="js-save btn btn-primary center-block">Сохранить сессию</button>`;
 
         const button = wrapper.querySelector(".js-save");
